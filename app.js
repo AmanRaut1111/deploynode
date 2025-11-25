@@ -6,7 +6,7 @@ console.log(process.env.PORT);
 const app = express();
 
 app.get("/", (req, res) => {
-  res.send("Hello CI/CD by Aman Raut node");
+  res.send("Hello CI/CD by Aman Raut nodeJS");
 });
 
 app.listen(3000, () => {
