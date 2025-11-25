@@ -28,9 +28,9 @@ jobs:
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
+            sudo chown -R ubuntu:ubuntu /home/ubuntu/nodeapp
             cd /home/ubuntu/nodeapp
             npm install
-            # Use PM2 app name instead of file
             pm2 describe nodeapp > /dev/null || pm2 start app.js --name nodeapp
             pm2 restart nodeapp
             pm2 save
