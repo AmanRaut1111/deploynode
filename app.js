@@ -4,7 +4,7 @@ require("dotenv").config();
 const app = express();
 
 app.get("/", (req, res) => {
-  res.send("Hello CI/CD by Aman Raut node developer");
+  res.send("Hello CI/CD by Aman Raut node developer an React developer");
 });
 
 app.listen(process.env.PORT, () => {
