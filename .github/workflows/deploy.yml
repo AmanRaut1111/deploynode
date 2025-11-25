@@ -19,7 +19,7 @@ jobs:
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
           source: "."
-          target: "/home/ubuntu/node-app"
+          target: "/home/ubuntu/nodeapp"
 
       - name: Execute commands on EC2
         uses: appleboy/ssh-action@v1.0.3
@@ -28,6 +28,6 @@ jobs:
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            cd /home/ubuntu/node-app
+            cd /home/ubuntu/nodeapp
             npm install
             pm2 restart app.js || pm2 start app.js
