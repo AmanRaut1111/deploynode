@@ -30,4 +30,7 @@ jobs:
           script: |
             cd /home/ubuntu/node-app
             npm install
-            pm2 restart app.js || pm2 start app.js
+            # Use PM2 app name instead of file
+            pm2 describe nodeapp > /dev/null || pm2 start app.js --name nodeapp
+            pm2 restart nodeapp
+            pm2 save
