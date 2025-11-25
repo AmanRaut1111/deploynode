@@ -19,7 +19,7 @@ jobs:
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
           source: "."
-          target: "/home/ubuntu/nodeapp"
+          target: "/home/ubuntu/nodeapp"   # <-- Your chosen folder
 
       - name: Execute commands on EC2
         uses: appleboy/ssh-action@v1.0.3
@@ -29,8 +29,8 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
             sudo chown -R ubuntu:ubuntu /home/ubuntu/nodeapp
-            cd /home/ubuntu/nodeapp
+            cd /home/ubuntu/nodeapp       # <-- FIXED
             npm install
-            pm2 describe nodeapp > /dev/null || pm2 start app.js --name nodeapp
+            pm2 start app.js --name nodeapp || true
             pm2 restart nodeapp
             pm2 save
