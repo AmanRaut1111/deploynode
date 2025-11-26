@@ -12,14 +12,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Copy files to EC2
+      - name: Copy files to EC2 (exclude .env)
         uses: appleboy/scp-action@v0.1.4
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
-          source: "."
-          target: "/home/ubuntu/nodeapp"   # <-- Your chosen folder
+          source: "./!(*.env)"            # <-- Do NOT overwrite server .env
+          target: "/home/ubuntu/nodeapp"
 
       - name: Execute commands on EC2
         uses: appleboy/ssh-action@v1.0.3
@@ -29,7 +29,7 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
             sudo chown -R ubuntu:ubuntu /home/ubuntu/nodeapp
-            cd /home/ubuntu/nodeapp       # <-- FIXED
+            cd /home/ubuntu/nodeapp
             npm install
             pm2 start app.js --name nodeapp || true
             pm2 restart nodeapp
