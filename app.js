@@ -1,5 +1,5 @@
 const express = require("express");
-// require("dotenv").config();
+require("dotenv").config();
 
 console.log(process.env.PORT);
 
@@ -9,7 +9,7 @@ app.get("/", (req, res) => {
   res.send("Hello CI/CD by Noejs developer");
 });
 
-app.listen(3000, () => {
+app.listen(process.env.PORT, () => {
   console.log("sever is listeming on port 3000");
 });
 
